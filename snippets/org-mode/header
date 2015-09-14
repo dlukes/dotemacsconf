@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# key: header_
+# --
+#+TITLE: $1
+#+AUTHOR: $2
+#+DATE: `(progn (org-insert-time-stamp (current-time) nil t) nil)`

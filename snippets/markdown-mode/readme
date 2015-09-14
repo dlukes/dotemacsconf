@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# key: readme
+# --
+# ${1:project-name}
+
+## License
+
+Copyright © `(format-time-string "%Y")` ${2:[ÚČNK](http://korpus.cz)/David Lukeš}
+
+Distributed under the ${3:[GNU General Public License v3](http://www.gnu.org/licenses/gpl-3.0.en.html)}.
