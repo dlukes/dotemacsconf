@@ -6,6 +6,7 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("suncom"   . "http://joseito.republika.pl/sunrise-commander/"))
+
 (package-initialize)
 (package-refresh-contents)
 

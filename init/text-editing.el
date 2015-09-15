@@ -1,12 +1,7 @@
 (load "editorconfig")
 
 (setq-default indent-tabs-mode nil)
-;; defer these settings to .editorconfig
-;; (setq default-tab-width 2)
-;; (setq tab-stop-list (number-sequence 2 200 2))
 (set-keyboard-coding-system 'utf-8)
-(setq column-number-mode t)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; set font (should be done as part of an alist of things that are only
 ;; evaluated when a GUI frame is started):
@@ -24,6 +19,8 @@
 ;; highlight current line
 (global-hl-line-mode t)
 
+;;; Hooks
+
 ;; hard-wrap long lines
 (add-hook 'after-change-major-mode-hook 'auto-fill-mode)
 
@@ -36,3 +33,5 @@
 ;; rainbow parens
 ;; (require 'rainbw-delimiters)
 ;; (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
