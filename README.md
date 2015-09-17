@@ -19,7 +19,7 @@
 
 ## Compatibility
 
-Mostly used with Emacs 24.3--24.5. Earlier versions are likely not to work or
+Mostly used with Emacs 24.5. Earlier versions are likely not to work or
 break in subtle ways.
 
 ## License
