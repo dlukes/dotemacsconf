@@ -1,0 +1,48 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# key: script
+# --
+#!/usr/bin/env python3
+
+"""${1:Module docstring.}
+
+"""
+
+import sys
+import argparse
+import logging
+
+
+def parse_arguments(argv):
+    """Return args list. \`argv\` is a list of arguments, or \`None\` for
+    \`\`sys.argv[1:]\`\`.
+
+    """
+    if argv is None:
+        argv = sys.argv[1:]
+    parser = argparse.ArgumentParser(description="""${2:Description.}""")
+    parser.add_argument("input_file", nargs="+")
+    parser.add_argument("-o", "--output", help="output file")
+    parser.add_argument("-l", "--log", help="logging verbosity",
+                        default="${3:DEBUG}"
+                        choices=["DEBUG", "INFO", "WARNING", "ERROR"])
+    parser.add_argument("-n", "--num", type=int, default=25,
+                        help="sample numeric argument")
+    parser.add_argument("-b", "--bool", action="store_true",
+                        help="sample boolean argument")
+    args = parser.parse_args(argv)
+    logging.basicConfig(level=args.log)
+    # check number of arguments, verify values, etc.:
+    # if args:
+    #     parser.error('program takes no command-line arguments; '
+    #                  '"%s" ignored.' % (args,))
+    return args
+
+
+def main(argv=None):
+    args = parse_arguments(argv)
+    return 0
+
+
+if __name__ == "__main__":
+    status = main()
+    sys.exit(status)
