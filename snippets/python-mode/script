@@ -23,7 +23,7 @@ def parse_arguments(argv):
     parser.add_argument("input_file", nargs="+")
     parser.add_argument("-o", "--output", help="output file")
     parser.add_argument("-l", "--log", help="logging verbosity",
-                        default="${3:DEBUG}"
+                        default="${3:DEBUG}",
                         choices=["DEBUG", "INFO", "WARNING", "ERROR"])
     parser.add_argument("-n", "--num", type=int, default=25,
                         help="sample numeric argument")
