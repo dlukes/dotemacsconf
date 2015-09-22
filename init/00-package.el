@@ -18,7 +18,7 @@
   multiple-cursors scss-mode neotree yaml-mode go-mode nyan-mode
   visual-regexp visual-regexp-steroids sunrise-commander
   sunrise-x-checkpoints sunrise-x-tabs sunrise-x-loop
-  sunrise-x-modeline yasnippet zenburn-theme))
+  sunrise-x-modeline yasnippet zenburn-theme evil-commentary))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
