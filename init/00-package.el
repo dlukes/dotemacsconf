@@ -14,11 +14,11 @@
   enh-ruby-mode flx-ido ido-ubiquitous find-file-in-project magit
   projectile flx smex scpaste markdown-mode haml-mode org jedi
   auctex auto-complete cider undo-tree pandoc-mode clojure-mode
-  ess js2-mode php-mode slime web-mode editorconfig evil
-  multiple-cursors scss-mode neotree yaml-mode go-mode nyan-mode
-  visual-regexp visual-regexp-steroids sunrise-commander
-  sunrise-x-checkpoints sunrise-x-tabs sunrise-x-loop
-  sunrise-x-modeline yasnippet zenburn-theme evil-commentary))
+  ess js2-mode php-mode slime web-mode editorconfig evil css-mode
+  neotree yaml-mode go-mode nyan-mode visual-regexp
+  visual-regexp-steroids sunrise-commander sunrise-x-checkpoints
+  sunrise-x-tabs sunrise-x-loop sunrise-x-modeline yasnippet
+  zenburn-theme evil-commentary))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
