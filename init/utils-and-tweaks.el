@@ -34,6 +34,7 @@
 (global-set-key (kbd "s-n") 'make-frame)
 
 (display-battery-mode)
+(scroll-bar-mode 0)
 
 ;; stuff that depends upon whether a GUI frame is being opened:
 (defun make-frame-hook ()
