@@ -39,8 +39,6 @@
  '(delete-selection-mode nil)
  '(desktop-save-mode t)
  '(doc-view-continuous t)
- '(elpy-interactive-python-command "python3")
- '(elpy-rpc-backend "jedi")
  '(emms-player-list
    (quote
     (emms-player-vlc emms-player-mpg321 emms-player-ogg123 emms-player-mplayer-playlist emms-player-mplayer)))

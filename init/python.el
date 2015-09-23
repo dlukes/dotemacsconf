@@ -1,4 +1,5 @@
-;; M-. for goto def, M-, for pop goto def:
-(setq jedi:use-shortcuts t)
+(defun company-jedi-hook ()
+  (add-to-list 'company-backends 'company-jedi))
 
 (add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'company-jedi-hook)
