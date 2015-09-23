@@ -14,13 +14,6 @@
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
-;; zap up to char
-(autoload 'zap-up-to-char "misc"
-  "Kill up to, but not including ARGth occurrence of CHAR.
-  \(fn arg char)"
-  'interactive)
-(global-set-key (kbd "M-z") 'zap-up-to-char)
-
 ;; disable graphical window popups, which make emacs crash on os x
 (defadvice yes-or-no-p (around prevent-dialog activate)
   "Prevent yes-or-no-p from activating a dialog"
@@ -45,11 +38,7 @@
 ;; stuff that depends upon whether a GUI frame is being opened:
 (defun make-frame-hook ()
   (when (window-system)
-    ;; remove scroll bars
-    (scroll-bar-mode 0)
-    ;; set transparency
     (set-frame-parameter (selected-frame) 'alpha '(90 90))
-    ;; resize width of frame:
     (set-frame-width (selected-frame) 90)))
 ;; run it for the first frame:
 (make-frame-hook)
@@ -61,21 +50,6 @@
 
 ;; backspace on active region deletes it
 (delete-selection-mode 1)
-
-;; enable inline-image-mode
-;; (add-hook 'after-change-major-mode-hook 'iimage-mode)
-
-;; set cursor to yellow!!!
-;; (defun yellow-cursor ()
-;;   (set-cursor-color "yellow"))
-;; (add-hook 'after-change-major-mode-hook 'yellow-cursor)
-;; ;; set the cursor to yellow for the first frame...
-;; (yellow-cursor)
-;; ;; ... and for any subsequent frame
-;; (add-hook 'after-make-frame-functions
-;;           '(lambda (frame)
-;;              (select-frame frame)
-;;              (yellow-cursor)))
 
 ;; enable mouse scrolling in terminal
 (xterm-mouse-mode t)
@@ -161,56 +135,6 @@ the region."
 (define-key global-map [remap exchange-point-and-mark]
   'exchange-point-and-mark-no-activate)
 
-;; ido-enhanced imenu (for navigating in buffers?)
-(defun ido-goto-symbol (&optional symbol-list)
-  "Refresh imenu and jump to a place in the buffer using Ido."
-  (interactive)
-  (unless (featurep 'imenu)
-    (require 'imenu nil t))
-  (cond
-   ((not symbol-list)
-    (let ((ido-mode ido-mode)
-          (ido-enable-flex-matching
-           (if (boundp 'ido-enable-flex-matching)
-               ido-enable-flex-matching t))
-          name-and-pos symbol-names position)
-      (unless ido-mode
-        (ido-mode 1)
-        (setq ido-enable-flex-matching t))
-      (while (progn
-               (imenu--cleanup)
-               (setq imenu--index-alist nil)
-               (ido-goto-symbol (imenu--make-index-alist))
-               (setq selected-symbol
-                     (ido-completing-read "Symbol? " symbol-names))
-               (string= (car imenu--rescan-item) selected-symbol)))
-      (unless (and (boundp 'mark-active) mark-active)
-        (push-mark nil t nil))
-      (setq position (cdr (assoc selected-symbol name-and-pos)))
-      (cond
-       ((overlayp position)
-        (goto-char (overlay-start position)))
-       (t
-        (goto-char position)))))
-   ((listp symbol-list)
-    (dolist (symbol symbol-list)
-      (let (name position)
-        (cond
-         ((and (listp symbol) (imenu--subalist-p symbol))
-          (ido-goto-symbol symbol))
-         ((listp symbol)
-          (setq name (car symbol))
-          (setq position (cdr symbol)))
-         ((stringp symbol)
-          (setq name symbol)
-          (setq position
-                (get-text-property 1 'org-imenu-marker symbol))))
-        (unless (or (null position) (null name)
-                    (string= (car imenu--rescan-item) name))
-          (add-to-list 'symbol-names name)
-          (add-to-list 'name-and-pos (cons name position))))))))
-(global-set-key (kbd "C-c i") 'ido-goto-symbol)
-
 ;;; AUTO-SUDO
 (defadvice ido-find-file (after find-file-sudo activate)
   "Find file as root if necessary."
@@ -239,9 +163,3 @@ Version 2015-06-11"
 ;;; BINDINGS FOR TERMINAL SESSIONS
 (global-set-key (kbd "M-[ a") (kbd "C-<up>"))
 (global-set-key (kbd "M-[ b") (kbd "C-<down>"))
-
-;;; SMARTEN PUNCTUATION
-;; (add-hook 'post-self-insert-hook 'smarten-punctuation)
-
-;; (defun smarten-punctuation ()
-;;   (message "foo"))
