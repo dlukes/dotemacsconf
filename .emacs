@@ -45,7 +45,6 @@
  '(ess-default-style (quote DEFAULT))
  '(explicit-shell-file-name "zsh")
  '(fill-column 79)
- '(ido-enable-flex-matching t)
  '(initial-buffer-choice "~/org/2015.org")
  '(mark-even-if-inactive t)
  '(org-agenda-files (\` ((\, agenda))))
