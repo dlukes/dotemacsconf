@@ -55,7 +55,7 @@
 (xterm-mouse-mode t)
 
 ;; toggle minimalistic mode
-(defvar minimalistic nil)
+(defvar minimalistic t)
 (defun toggle-minimalistic ()
   (interactive)
   (cond ((equal minimalistic nil)

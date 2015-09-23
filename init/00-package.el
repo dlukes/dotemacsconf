@@ -23,3 +23,5 @@
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+(require 'better-defaults)
