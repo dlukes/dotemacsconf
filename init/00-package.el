@@ -18,7 +18,7 @@
   nyan-mode visual-regexp company visual-regexp-steroids
   sunrise-commander sunrise-x-checkpoints sunrise-x-tabs
   sunrise-x-loop sunrise-x-modeline yasnippet zenburn-theme
-  evil-commentary))
+  evil-commentary key-chord))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
