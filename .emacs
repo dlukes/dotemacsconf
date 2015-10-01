@@ -33,24 +33,20 @@
    ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(blink-cursor-mode t)
  '(browse-url-chromium-program "google-chrome")
- '(custom-safe-themes
-   (quote
-    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "26614652a4b3515b4bbbb9828d71e206cc249b67c9142c06239ed3418eff95e2" default)))
  '(delete-selection-mode nil)
  '(desktop-save-mode t)
  '(doc-view-continuous t)
- '(emms-player-list
-   (quote
-    (emms-player-vlc emms-player-mpg321 emms-player-ogg123 emms-player-mplayer-playlist emms-player-mplayer)))
  '(ess-default-style (quote DEFAULT))
  '(explicit-shell-file-name "zsh")
  '(fill-column 79)
+ '(ido-enable-flex-matching t)
  '(initial-buffer-choice "~/org/2015.org")
  '(mark-even-if-inactive t)
  '(org-agenda-files (\` ((\, agenda))))
  '(org-archive-location "archive/%s::")
  '(org-directory "~/org")
  '(org-export-backends (quote (ascii beamer html icalendar latex md odt freemind)))
+ '(org-log-done (quote note))
  '(org-publish-project-alist (quote ((:htmlized-source . t))))
  '(python-shell-interpreter "python3")
  '(safe-local-variable-values
@@ -64,6 +60,13 @@
  '(web-mode-css-indent-offset 2)
  '(web-mode-markup-indent-offset 2)
  '(web-mode-sql-indent-offset 2))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 ;; disabled disableds
 (put 'downcase-region 'disabled nil)
