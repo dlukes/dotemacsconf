@@ -18,10 +18,11 @@
   nyan-mode visual-regexp company visual-regexp-steroids
   sunrise-commander sunrise-x-checkpoints sunrise-x-tabs
   sunrise-x-loop sunrise-x-modeline yasnippet zenburn-theme
-  evil-commentary key-chord))
+  evil-commentary key-chord git-gutter+ use-package))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
 
 (require 'better-defaults)
+(require 'use-package)
