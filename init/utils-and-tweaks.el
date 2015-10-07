@@ -35,6 +35,8 @@
 
 (display-battery-mode)
 
+(scroll-bar-mode -1)
+
 ;; stuff that depends upon whether a GUI frame is being opened:
 (defun make-frame-hook ()
   (when (window-system)
