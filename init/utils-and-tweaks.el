@@ -35,11 +35,11 @@
 
 (display-battery-mode)
 
-(scroll-bar-mode -1)
-
 ;; stuff that depends upon whether a GUI frame is being opened:
 (defun make-frame-hook ()
   (when (window-system)
+    ;; scroll-bar-mode is undefined when there's no GUI
+    (scroll-bar-mode -1)
     (set-frame-parameter (selected-frame) 'alpha '(90 90))
     (set-frame-width (selected-frame) 90)))
 ;; run it for the first frame:
