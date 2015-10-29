@@ -1,6 +1,6 @@
 (require 'yasnippet)
 
-(add-to-list 'yas-snippet-dirs (concat emacs-conf "snippets"))
+(setq yas-snippet-dirs (list (concat emacs-conf "snippets") 'yas-installed-snippets-dir))
 (yas-global-mode)
 
 (global-set-key (kbd "C-c e") 'yas-expand)
