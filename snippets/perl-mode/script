@@ -19,23 +19,22 @@ my $LOG = Log::Fast->new({
   prefix => "[%D %T $FindBin::Script:%L] "
              });
 
-use open ':encoding(cp1250)'; # set PerlIO layers for all IN/OUT filehandles
-use encoding 'cp1250'; # set the program and STDIN/STDOUT's default encoding
+sub parse_args {
+  my $argv = \@_ || \@ARGV;
 
-# this sets up automatic decoding of all newly opened IN filehandles to utf8,
-# and automatic encoding of all newly opened OUT filehandles to latin2;
-# additionally, the :std subpragma adjusts all standard streams in the same way
-use open IN => ":encoding(utf8)", OUT => ":encoding(latin2)", ":std";
+  my $ap = Getopt::ArgParse->new_parser(
+    prog => $FindBin::Script,
+    description => '${2:What this program does.}',
+    epilog => '${3:This appears at the bottom of usage.}'
+      );
+  $ap->add_arg('--foo', '-f', required => 1);
+  $ap->add_arg('--bool', '-b', type => 'Bool');
+  # positional arg (or use subcommands)
+  $ap->add_arg('command', help => 'command to run', required => 1);
 
-# for manual de/encoding and conversion
-use Encode qw(encode decode from_to);
-
-# the following are equivalent: decode, then encode; or from_to. but careful:
-# from_to modifies in place, and sometimes the string that's passed in will
-# already be decoded (it will be a character string, not a byte string), if IO
-# layers are set (see above). in that case, the decode step (and by extension
-# from_to, which uses it) will fail.
+  return $ap->parse_args(@$argv);
+}
 
 unless (caller) {
-
+  my $args = parse_args();
 }
