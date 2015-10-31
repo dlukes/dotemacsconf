@@ -3,9 +3,21 @@
 # --
 #!/usr/bin/env perl
 
+# ${1:Script overview.}
+
 use utf8;
-use open qw(:std :utf8); # or even rather :encoding(UTF-8) (stricter)
-use warnings qw(FATAL utf8); # to be sure to get at any encoding mixups
+use strict;
+use warnings;
+use open qw(:std :encoding(UTF-8));
+use warnings qw(FATAL utf8);
+use FindBin;
+use Log::Fast;
+use Getopt::ArgParse;
+use v5.14;
+
+my $LOG = Log::Fast->new({
+  prefix => "[%D %T $FindBin::Script:%L] "
+             });
 
 use open ':encoding(cp1250)'; # set PerlIO layers for all IN/OUT filehandles
 use encoding 'cp1250'; # set the program and STDIN/STDOUT's default encoding
@@ -23,3 +35,7 @@ use Encode qw(encode decode from_to);
 # already be decoded (it will be a character string, not a byte string), if IO
 # layers are set (see above). in that case, the decode step (and by extension
 # from_to, which uses it) will fail.
+
+unless (caller) {
+
+}
