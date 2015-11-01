@@ -30,10 +30,11 @@ sub parse_args {
       );
   $ap->add_arg('--foo', '-f', required => 1);
   $ap->add_arg('--bool', '-b', type => 'Bool');
-  # positional arg (or use subcommands)
-  $ap->add_arg('command', help => 'command to run', required => 1);
+  $ap->add_arg('input', nargs => '*', help => 'input file(s) (or STDIN)');
 
-  return $ap->parse_args(@$argv);
+  my $args = $ap->parse_args(@$argv);
+  @ARGV = $args->input;
+  return $args;
 }
 
 unless (caller) {
