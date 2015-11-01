@@ -10,6 +10,7 @@ use strict;
 use warnings;
 use open qw(:std :encoding(UTF-8));
 use warnings qw(FATAL utf8);
+use autodie;
 use FindBin;
 use Log::Fast;
 use Getopt::ArgParse;
