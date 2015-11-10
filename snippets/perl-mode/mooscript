@@ -1,0 +1,70 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# key: mooscript
+# --
+#!/usr/bin/env perl
+
+use utf8;
+use strict;
+use warnings;
+use open qw(:std :encoding(UTF-8));
+use warnings qw(FATAL utf8);
+use autodie;
+use FindBin;
+use Log::Fast;
+use v5.14;
+
+my $LOG = Log::Fast->new({
+  prefix => "[%D %T $FindBin::Script:%L] "
+             });
+
+package App;
+use Moose;
+
+with 'MooseX::Getopt::Usage',
+    'MooseX::Getopt::Usage::Role::Man';
+
+has 'out' => (is => 'rw',
+              isa => 'Str',
+              default => 'STDOUT',
+              documentation => 'The out paramater');
+has 'input' => (traits => ['Getopt'],
+                is => 'rw',
+                isa => 'Str',
+                required => 1,
+                cmd_flag => 'in',
+                cmd_aliases => 'i',
+                documentation => 'The in parameter');
+
+sub getopt_usage_config {
+  return (
+    usage_sections => [qw(NAME SYNOPSIS OPTIONS DESCRIPTION)]
+    );
+}
+
+sub main {
+  $LOG->INFO('Everything is working.');
+}
+
+no Moose;
+__PACKAGE__->meta->make_immutable;
+
+unless (caller) {
+  my $app = App->new_with_options();
+  $app->main;
+  # use Data::Dumper;
+  # print Dumper $app;
+}
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+${1:Script name -- and overview.}
+
+=head1 DESCRIPTION
+
+${2:A longer description.}
+
+=cut
