@@ -1,4 +1,4 @@
-(when (not (member system-name '("trnka.ucnk" "trost.ucnk")))
+(when (not (string-match "trnka\\|trost" system-name))
   (nyan-mode)
 
   ;; org-mode automatic mobile sync
