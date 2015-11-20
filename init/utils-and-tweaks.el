@@ -50,6 +50,18 @@
              (select-frame frame)
              (make-frame-hook)))
 
+;; set cursor to yellow!!!
+(defun yellow-cursor ()
+  (set-cursor-color "yellow"))
+(add-hook 'after-change-major-mode-hook 'yellow-cursor)
+;; set the cursor to yellow for the first frame...
+(yellow-cursor)
+;; ... and for any subsequent frame
+(add-hook 'after-make-frame-functions
+          '(lambda (frame)
+             (select-frame frame)
+             (yellow-cursor)))
+
 ;; backspace on active region deletes it
 (delete-selection-mode 1)
 
