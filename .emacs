@@ -1,4 +1,4 @@
-(defvar emacs-conf (file-name-as-directory "~/.emacs-conf"))
+(defvar emacs-conf (file-name-as-directory "~/.emacsconf"))
 
 (defun load-directory (directory)
   "Load recursively all '.el' files under DIRECTORY."
