@@ -6,13 +6,13 @@ of browser."
   (save-selected-window
     (sr-select-viewer-window)
     (let ((buff (current-buffer))
-	  (fname (if (file-directory-p file)
-		     file
-		   (file-name-nondirectory file)))
-	  (app (cond
-		((eq system-type 'darwin) "open %s")
-		((eq system-type 'windows-nt) "open %s")
-		(t "xdg-open %s"))))
+           (fname (if (file-directory-p file)
+                    file
+                    (file-name-nondirectory file)))
+           (app (cond
+                  ((eq system-type 'darwin) "open %s")
+                  ((eq system-type 'windows-nt) "open %s")
+                  (t "xdg-open %s"))))
       (start-process-shell-command "open" nil (format app file))
       (unless (eq buff (current-buffer))
         (sr-scrollable-viewer (current-buffer)))

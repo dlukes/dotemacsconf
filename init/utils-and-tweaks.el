@@ -3,11 +3,11 @@
   "Renames both current buffer and file it's visiting to NEW-NAME."
   (interactive "sNew name: ")
   (let ((name (buffer-name))
-        (filename (buffer-file-name)))
+         (filename (buffer-file-name)))
     (if (not filename)
-        (message "Buffer '%s' is not visiting a file!" name)
+      (message "Buffer '%s' is not visiting a file!" name)
       (if (get-buffer new-name)
-          (message "A buffer named '%s' already exists!" new-name)
+        (message "A buffer named '%s' already exists!" new-name)
         (progn
           (rename-file name new-name 1)
           (rename-buffer new-name)
@@ -46,21 +46,21 @@
 (make-frame-hook)
 ;; and for any subsequent frame:
 (add-hook 'after-make-frame-functions
-	  '(lambda (frame)
-             (select-frame frame)
-             (make-frame-hook)))
+  '(lambda (frame)
+     (select-frame frame)
+     (make-frame-hook)))
 
-;; set cursor to yellow!!!
-(defun yellow-cursor ()
-  (set-cursor-color "yellow"))
-(add-hook 'after-change-major-mode-hook 'yellow-cursor)
+;; make sure cursor has a clearly visible color even under KDE
+(defun cursor-color ()
+  (set-cursor-color "white"))
+(add-hook 'after-change-major-mode-hook 'cursor-color)
 ;; set the cursor to yellow for the first frame...
-(yellow-cursor)
+(cursor-color)
 ;; ... and for any subsequent frame
 (add-hook 'after-make-frame-functions
-          '(lambda (frame)
-             (select-frame frame)
-             (yellow-cursor)))
+  '(lambda (frame)
+     (select-frame frame)
+     (cursor-color)))
 
 ;; backspace on active region deletes it
 (delete-selection-mode 1)
@@ -73,13 +73,13 @@
 (defun toggle-minimalistic ()
   (interactive)
   (cond ((equal minimalistic nil)
-	 (menu-bar-mode -1)
-	 (tool-bar-mode -1)
-	 (setq minimalistic t))
-	((equal minimalistic t)
-	 (menu-bar-mode)
-	 (tool-bar-mode)
-	 (setq minimalistic nil))))
+          (menu-bar-mode -1)
+          (tool-bar-mode -1)
+          (setq minimalistic t))
+    ((equal minimalistic t)
+      (menu-bar-mode)
+      (tool-bar-mode)
+      (setq minimalistic nil))))
 (global-set-key (kbd "C--") 'toggle-minimalistic)
 
 ;; a save command which simultaneously creates a copy on the trnka.korpus.cz
@@ -103,13 +103,13 @@
   ;; (switch-to-buffer "archiv_sondy_UCNK.org")
   (end-of-buffer)
   (let* ((str (car kill-ring))
-         (len (length str))
-         (from (- len
+          (len (length str))
+          (from (- len
                   (or (string-match "\n" (concat (reverse (append str
-                                                                  nil)))
-                                    1)
-                      len)))
-         (ins (substring str from)))
+                                                            nil)))
+                        1)
+                    len)))
+          (ins (substring str from)))
     (insert ins))
   (insert "\n")
   (save-buffer)
@@ -153,11 +153,11 @@ the region."
 (defadvice ido-find-file (after find-file-sudo activate)
   "Find file as root if necessary."
   (unless (and buffer-file-name
-               (file-writable-p buffer-file-name))
+            (file-writable-p buffer-file-name))
     (if (y-or-n-p (concat "File "
-                          buffer-file-name
-                          " is read-only.  Open it as root? "))
-        (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name)))))
+                    buffer-file-name
+                    " is read-only.  Open it as root? "))
+      (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name)))))
 
 ;;; FONTIFY HEX COLOR CODES
 (defun syntax-color-hex ()
@@ -166,12 +166,12 @@ URL `http://ergoemacs.org/emacs/emacs_CSS_colors.html'
 Version 2015-06-11"
   (interactive)
   (font-lock-add-keywords
-   nil
-   '(("#[abcdef[:digit:]]\\{6\\}"
-      (0 (put-text-property
-          (match-beginning 0)
-          (match-end 0)
-          'face (list :background (match-string-no-properties 0)))))))
+    nil
+    '(("#[abcdef[:digit:]]\\{6\\}"
+        (0 (put-text-property
+             (match-beginning 0)
+             (match-end 0)
+             'face (list :background (match-string-no-properties 0)))))))
   (font-lock-fontify-buffer))
 
 ;;; BINDINGS FOR TERMINAL SESSIONS
