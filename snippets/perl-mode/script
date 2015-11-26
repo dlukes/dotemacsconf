@@ -1,5 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # key: script
+# expand-env: ((yas-indent-line 'fixed))
 # --
 #!/usr/bin/env perl
 
