@@ -18,7 +18,7 @@
   nyan-mode visual-regexp company visual-regexp-steroids
   sunrise-commander sunrise-x-checkpoints sunrise-x-tabs
   sunrise-x-loop sunrise-x-modeline yasnippet zenburn-theme
-  evil-commentary key-chord git-gutter+ use-package
+  evil-commentary key-chord git-gutter+ use-package nix-mode
   evil-surround))
 
 (dolist (p my-packages)
