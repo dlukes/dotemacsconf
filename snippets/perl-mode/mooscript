@@ -62,7 +62,7 @@ unless (caller) {
 
 =head1 NAME
 
-${1:Script name -- and overview.}
+${1:mooscript.pl - do this or that.}
 
 =head1 DESCRIPTION
 
