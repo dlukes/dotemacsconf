@@ -1,4 +1,7 @@
 (require 'package)
+(require 'cl)
+
+(package-initialize)
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -6,9 +9,6 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("suncom"   . "http://joseito.republika.pl/sunrise-commander/"))
-
-(package-initialize)
-(package-refresh-contents)
 
 (defvar my-packages '(better-defaults idle-highlight-mode
   enh-ruby-mode flx-ido ido-ubiquitous magit projectile flx smex
@@ -24,10 +24,15 @@
 ;; other modes to consider: eyebrowse or persp-mode for organizing workspaces;
 ;; anzu for improved searching
 
-
-(dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+(unless (every #'package-installed-p my-packages)
+  ;; check for new packages (package versions)
+  (message "Refreshing package database...")
+  (package-refresh-contents)
+  (message " done.")
+  ;; install the missing packages
+  (dolist (p my-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
 
 (require 'better-defaults)
 (require 'use-package)
