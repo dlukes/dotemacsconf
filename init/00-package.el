@@ -10,19 +10,64 @@
 (add-to-list 'package-archives
              '("suncom"   . "http://joseito.republika.pl/sunrise-commander/"))
 
-(defvar my-packages '(better-defaults idle-highlight-mode
-  enh-ruby-mode flx-ido ido-ubiquitous magit projectile flx smex
-  scpaste markdown-mode haml-mode org company-jedi auctex cider
-  undo-tree pandoc-mode clojure-mode ess js2-mode php-mode slime
-  web-mode editorconfig evil css-mode neotree yaml-mode go-mode
-  nyan-mode visual-regexp company visual-regexp-steroids
-  sunrise-commander sunrise-x-checkpoints sunrise-x-tabs
-  sunrise-x-loop sunrise-x-modeline yasnippet zenburn-theme
-  evil-commentary key-chord git-gutter+ use-package nix-mode
-  evil-surround spaceline flycheck auto-compile pyenv-mode pyvenv
-  fancy-battery))
-;; other modes to consider: eyebrowse or persp-mode for organizing workspaces;
-;; anzu for improved searching
+(defvar my-packages
+  '(
+    auctex
+    auto-compile
+    better-defaults
+    cider
+    clojure-mode
+    company
+    company-jedi
+    css-mode
+    editorconfig
+    enh-ruby-mode
+    ess
+    evil
+    evil-commentary
+    evil-surround
+    fancy-battery
+    flx
+    flx-ido
+    flycheck
+    git-gutter+
+    go-mode
+    haml-mode
+    idle-highlight-mode
+    ido-ubiquitous
+    js2-mode
+    key-chord
+    magit
+    markdown-mode
+    neotree
+    nix-mode
+    nyan-mode
+    org
+    pandoc-mode
+    php-mode
+    projectile
+    pyenv-mode
+    pyvenv
+    scpaste
+    slime
+    smex
+    spaceline
+    sunrise-commander
+    sunrise-x-checkpoints
+    sunrise-x-loop
+    sunrise-x-modeline
+    sunrise-x-tabs
+    undo-tree
+    use-package
+    visual-regexp
+    visual-regexp-steroids
+    web-mode
+    yaml-mode
+    yasnippet
+    zenburn-theme
+    ;; other modes to consider: eyebrowse or persp-mode for organizing workspaces;
+    ;; anzu for improved searching
+    ))
 
 (unless (every #'package-installed-p my-packages)
   ;; check for new packages (package versions)
