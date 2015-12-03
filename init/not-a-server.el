@@ -1,5 +1,5 @@
 (when (not (string-match "trnka\\|trost" system-name))
-  (nyan-mode)
+  ;; (nyan-mode)
 
   ;; org-mode automatic mobile sync
   ;; (defvar org-mobile-sync-timer nil)
