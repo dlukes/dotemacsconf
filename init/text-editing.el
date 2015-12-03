@@ -14,7 +14,7 @@
 ;; (global-linum-mode t)
 
 ;; set auto-completing paired characters
-;; (electric-pair-mode 1)
+(electric-pair-mode t)
 
 ;; highlight current line
 (global-hl-line-mode t)
