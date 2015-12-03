@@ -1,9 +1,8 @@
-(defun comment-line ()
-  (interactive)
-  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+;; (defun comment-line ()
+;;   (interactive)
+;;   (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
 
-(global-set-key (kbd "C-;") 'comment-line)
-(define-key evil-normal-state-map "gcc" 'comment-line)
+;; (global-set-key (kbd "C-;") 'comment-line)
 
 (defun dlukes-coding-hook ()
   (make-local-variable 'column-number-mode)
