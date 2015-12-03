@@ -19,7 +19,11 @@
   sunrise-commander sunrise-x-checkpoints sunrise-x-tabs
   sunrise-x-loop sunrise-x-modeline yasnippet zenburn-theme
   evil-commentary key-chord git-gutter+ use-package nix-mode
-  evil-surround))
+  evil-surround spaceline flycheck auto-compile pyenv-mode pyvenv
+  fancy-battery))
+;; other modes to consider: eyebrowse or persp-mode for organizing workspaces;
+;; anzu for improved searching
+
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
