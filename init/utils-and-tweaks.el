@@ -120,7 +120,7 @@
   (save-buffer))
 (global-set-key (kbd "C-á") 'cut-and-archive-line)
 
-;; CUSTOMIZATION FROM MASTERINGEMACS.ORG
+;;; CUSTOMIZATION FROM MASTERINGEMACS.ORG
 (fset 'yes-or-no-p 'y-or-n-p)
 (setq confirm-nonexistent-file-or-buffer nil)
 
@@ -177,3 +177,7 @@ Version 2015-06-11"
 ;;; BINDINGS FOR TERMINAL SESSIONS
 (global-set-key (kbd "M-[ a") (kbd "C-<up>"))
 (global-set-key (kbd "M-[ b") (kbd "C-<down>"))
+
+;;; POWERLINE COLOR CORRECTION
+;; see https://github.com/milkypostman/powerline/issues/54
+(setq ns-use-srgb-colorspace nil)
