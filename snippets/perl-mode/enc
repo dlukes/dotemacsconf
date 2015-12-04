@@ -1,6 +1,9 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # key: enc
 # --
+# this makes UTF-8 "just work" everywhere it makes sense, out of the box
+use utf8::all;
+
 use open ':encoding(cp1250)'; # set PerlIO layers for all IN/OUT filehandles
 use encoding 'cp1250'; # set the program and STDIN/STDOUT's default encoding
 
