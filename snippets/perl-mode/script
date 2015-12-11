@@ -11,13 +11,16 @@ use strict;
 use warnings;
 use autodie;
 use FindBin;
-use Log::Fast;
+use Log::Log4perl ':easy';
 use Getopt::ArgParse;
 use v5.14;
 
-my $LOG = Log::Fast->new({
-  prefix => "[%D %T $FindBin::Script:%L] "
-             });
+Log::Log4perl->easy_init(
+  {
+    layout => "[%d $FindBin::Script:%p] %m%n",
+    level  => $DEBUG,
+  }
+);
 
 sub parse_args {
   my $argv = \@_ || \@ARGV;

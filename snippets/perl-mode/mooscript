@@ -9,12 +9,15 @@ use strict;
 use warnings;
 use autodie;
 use FindBin;
-use Log::Fast;
+use Log::Log4perl ':easy';
 use v5.14;
 
-my $LOG = Log::Fast->new({
-  prefix => "[%D %T $FindBin::Script:%L] "
-             });
+Log::Log4perl->easy_init(
+  {
+    layout => "[%d $FindBin::Script:%p] %m%n",
+    level  => $DEBUG,
+  }
+);
 
 package App;
 use Moose;
@@ -41,7 +44,7 @@ sub getopt_usage_config {
 }
 
 sub main {
-  $LOG->INFO('Everything is working.');
+  INFO 'Everything is working.';
 }
 
 no Moose;
