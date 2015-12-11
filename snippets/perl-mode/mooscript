@@ -7,7 +7,6 @@
 use utf8::all;
 use strict;
 use warnings;
-use warnings qw(FATAL utf8);
 use autodie;
 use FindBin;
 use Log::Fast;
