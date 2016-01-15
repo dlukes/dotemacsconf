@@ -1,0 +1,26 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# key: click
+# expand-env: ((yas-indent-line 'fixed))
+# --
+import os
+import click
+import logging
+
+
+@click.command()
+@click.option("--log", help="Logging verbosity.", default="DEBUG",
+              type=click.Choice(["DEBUG", "INFO", "WARNING", "ERROR"]))
+@click.argument("input", type=click.File("r"))
+def cli(log, input):
+    """${1:CLI docstring.
+
+    \b
+    - don't
+    - rewrap
+    - this}
+
+    """
+    logging.basicConfig(level=log, format="[%(asctime)s " +
+                        os.path.basename(__file__) +
+                        ":%(levelname)s] %(message)s")
+    click.echo("This works.")
