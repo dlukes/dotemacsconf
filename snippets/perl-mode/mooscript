@@ -4,7 +4,9 @@
 # --
 #!/usr/bin/env perl
 
+package App;
 use utf8::all;
+use Moose;
 use strict;
 use warnings;
 use autodie;
@@ -18,9 +20,6 @@ Log::Log4perl->easy_init(
     level  => $DEBUG,
   }
 );
-
-package App;
-use Moose;
 
 with 'MooseX::Getopt::Usage',
     'MooseX::Getopt::Usage::Role::Man';
@@ -67,6 +66,7 @@ ${1:mooscript.pl - do this or that.}
 
 =head1 DESCRIPTION
 
-${2:A longer description.}
+${2:A longer description. Rename to `DETAILS' if more than one paragraph long or
+if containing non-ASCII characters.}
 
 =cut
