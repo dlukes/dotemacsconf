@@ -7,6 +7,7 @@
 package App;
 use utf8::all;
 use Moose;
+use Moose::Util::TypeConstraints;
 use strict;
 use warnings;
 use autodie;
@@ -24,17 +25,23 @@ Log::Log4perl->easy_init(
 with 'MooseX::Getopt::Usage',
     'MooseX::Getopt::Usage::Role::Man';
 
+subtype 'File',
+    as 'Str',
+    where { -f $_ },
+    message { "'$_' is not a path to an existing file." };
+
 has 'out' => (is => 'rw',
               isa => 'Str',
+              required => 1,
               default => 'STDOUT',
               documentation => 'The out paramater');
+
 has 'input' => (traits => ['Getopt'],
-                is => 'rw',
-                isa => 'Str',
-                required => 1,
+                is => 'ro',
+                isa => 'ArrayRef[File]',
                 cmd_flag => 'in',
                 cmd_aliases => 'i',
-                documentation => 'The in parameter');
+                documentation => 'Input files or STDIN if absent');
 
 sub getopt_usage_config {
   return (
@@ -43,7 +50,12 @@ sub getopt_usage_config {
 }
 
 sub main {
+  my $self = shift;
   INFO 'Everything is working.';
+  @ARGV = defined($self->input) ? @{$self->input} : ();
+  while (<>) {
+    print;
+  }
 }
 
 no Moose;
