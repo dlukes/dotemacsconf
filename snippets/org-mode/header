@@ -3,7 +3,7 @@
 # --
 #+TITLE: $1
 #+AUTHOR: $2
-#+DATE: `(progn (org-insert-time-stamp (current-time) nil t) nil)`
+#+DATE: `(format-time-string "[%Y-%m-%d %a]")`
 
 * ${3:Introduction}
 
