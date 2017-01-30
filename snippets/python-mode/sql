@@ -15,7 +15,7 @@ ${5:ORM_name} = Base.classes.${6:table_name}
 
 
 @contextmanager
-def session():
+def dbsession():
     s = sa.orm.Session(engine)
     try:
         yield s
@@ -32,7 +32,7 @@ def session():
 # session, then close it, and when it's next time to hit the database, a new
 # session should be created. See below:
 #
-# with session() as s:
+# with dbsession() as s:
 #     hit_db1(s)
 #     hit_db2(s)
 ${0}
