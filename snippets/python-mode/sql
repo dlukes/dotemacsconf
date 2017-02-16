@@ -27,12 +27,17 @@ def dbsession():
         s.close()
 
 
-# Session handling should be decoupled from logic. In other words, multiple
-# database operations around the same point in the program should reuse the same
-# session, then close it, and when it's next time to hit the database, a new
-# session should be created. See below:
+# Session handling should be decoupled from logic. In other words, multiple database operations
+# around the same point in the program should reuse the same session, then close it, and when it's
+# next time to hit the database, a new session should be created. See below:
 #
 # with dbsession() as s:
 #     hit_db1(s)
 #     hit_db2(s)
+
+# The easiest way to run some simple queries without bothering to set up any ORM reflection or
+# sessions is the following:
+#
+# for row in engine.execute(sa.text("select username from users where name like :name").params(name="%David%")):
+#     print(row)
 ${0}
