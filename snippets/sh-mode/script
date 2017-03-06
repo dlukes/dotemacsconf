@@ -1,0 +1,28 @@
+# -*- mode: sh -*-
+# name: script
+# key: script
+# --
+#!/usr/bin/env zsh
+
+set -e
+
+root=\${0:h:a}
+
+# copy script stderr to logfile (via named pipe)
+exec 2> >(tee -i logfile >&2)
+
+function log {
+  >&2 echo "[$(date)] $1"
+}
+
+function newline {
+  >&2 echo
+}
+
+# YN stores the result, but it's not needed since `read -q` returns 1 if the users enters anything
+# else than y or Y, so we exit because of `set -e`
+read -q "YN?Are you sure (y or n)?"
+
+# run command in background and kill it on exit / termination etc.
+sleep 10m &
+trap "kill $!" EXIT TERM INT HUP
