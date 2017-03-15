@@ -26,3 +26,18 @@ read -q "YN?Are you sure (y or n)?"
 # run command in background and kill it on exit / termination etc.
 sleep 10m &
 trap "kill $!" EXIT TERM INT HUP
+
+# run multiple commands in background, then wait for them to complete
+sleep 2s &
+sleep 3s &
+sleep 5s &
+wait
+
+# mathematical comparisons
+foo=4
+(( foo == 4 )) && echo true
+
+# regex comparisons
+bar="foobarbaz"
+[[ $bar =~ "bar" ]] && echo true
+! [[ $bar =~ "qux" ]] && echo true
