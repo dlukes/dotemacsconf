@@ -27,6 +27,11 @@ read -q "YN?Are you sure (y or n)?"
 sleep 10m &
 trap "kill $!" EXIT TERM INT HUP
 
+# kill the shell's process group (= all background and foreground commands) on exit / termination
+# etc. (first, convert other signals to EXIT to avoid an infinite loop caused by the kill)
+trap exit INT TERM HUP
+trap 'kill 0' EXIT
+
 # run multiple commands in background, then wait for them to complete
 sleep 2s &
 sleep 3s &
