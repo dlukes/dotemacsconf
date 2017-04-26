@@ -17,7 +17,7 @@ LOGLEVELS = [s for f, s in sorted(
 @cli.command()
 @cli.option("lvl", "--log", help="Set logging level.", type=cli.Choice(LOGLEVELS), default="WARN")
 @cli.option("--verbose", "-v", help="(Repeatedly) increase logging level.", count=True)
-@cli.option("--quiet", "-q", help="(Repeatedely) decrease logging level.", count=True)
+@cli.option("--quiet", "-q", help="(Repeatedly) decrease logging level.", count=True)
 @cli.argument("input", type=cli.File("rt", encoding="utf-8"), nargs=-1)
 def main(lvl, verbose, quiet, input):
     """${1:CLI docstring.
