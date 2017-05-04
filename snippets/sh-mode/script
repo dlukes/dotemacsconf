@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: foo
-# key: foo
+# name: script
+# key: script
 # --
 #!/usr/bin/env zsh
 
