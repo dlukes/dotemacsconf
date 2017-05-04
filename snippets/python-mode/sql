@@ -40,4 +40,4 @@ def dbsession():
 #
 # for row in engine.execute(sa.text("select username from users where name like :name").params(name="%David%")):
 #     print(row)
-${0}
+$0

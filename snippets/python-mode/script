@@ -4,7 +4,7 @@
 # --
 #!/usr/bin/env python3
 
-"""${1:Script docstring.}
+"""${1:Name, usage, description.}
 
 """
 
@@ -26,7 +26,7 @@ def parse_arguments(argv):
 
     """
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("input", nargs="*", help="input files, leave empty or ``-`` for STDIN")
+    parser.add_argument("input", nargs="*", help="input files, leave empty or - for STDIN")
     parser.add_argument("-s", "--string", help="sample string argument")
     parser.add_argument("-l", "--log", help="log levels", default="${2:WARNING}", choices=LOGLEVELS)
     parser.add_argument("-n", "--num", type=int, default=25, help="sample numeric argument")
@@ -44,6 +44,7 @@ def main(argv=None):
     input = args.input if args.input else ["-"]
     LOG.fatal("Everything's peachy!")
     for line in fi.input(input):
+        $0
         print(line, end="")
         break
 

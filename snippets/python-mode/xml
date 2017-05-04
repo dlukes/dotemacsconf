@@ -14,4 +14,4 @@ nsmap["ns"] = ns
 tree.findall("//{" + ns + "}${2:ElemName}")
 tree.xpath("//ns:${3:ElemName}", namespaces=nsmap)
 
-${0}
+$0

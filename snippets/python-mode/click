@@ -15,19 +15,19 @@ LOGLEVELS = [s for f, s in sorted(
 
 
 @cli.command()
-@cli.option("lvl", "--log", help="Set logging level.", type=cli.Choice(LOGLEVELS), default="WARN")
+@cli.option("lvl", "--log", help="Set logging level.", type=cli.Choice(LOGLEVELS), default="${1:WARN}")
 @cli.option("--verbose", "-v", help="(Repeatedly) increase logging level.", count=True)
 @cli.option("--quiet", "-q", help="(Repeatedly) decrease logging level.", count=True)
 @cli.argument("input", type=cli.File("rt", encoding="utf-8"), nargs=-1)
 def main(lvl, verbose, quiet, input):
-    """${1:CLI docstring.
+    """${2:CLI docstring.
 
     \b
     - don't
     - rewrap
     - this}
 
-    INPUT are the files to process. Leave empty or YY-Y for STDIN.
+    INPUT are the files to process. Leave empty or - for STDIN.
 
     """
     lvl = getattr(log, lvl) - 10*verbose + 10*quiet
@@ -36,6 +36,7 @@ def main(lvl, verbose, quiet, input):
     cli.echo("Logging level: {}".format(lvl))
     cli.echo("Input: {}".format(input))
     LOG.fatal("Everything's peachy!")
+    $0
 
 
 if __name__ == "__main__":

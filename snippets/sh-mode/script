@@ -1,36 +1,46 @@
-# -*- mode: sh -*-
-# name: script
-# key: script
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: foo
+# key: foo
 # --
 #!/usr/bin/env zsh
 
 set -e
 
-root=\${0:h:a}
+# kill the shell's process group (= all background and foreground commands) on exit / termination
+# etc. (first, convert other signals to EXIT to avoid an infinite loop caused by the kill)
+trap exit INT TERM HUP
+trap 'kill 0' EXIT
+
+# unfortunately, the above causes a non-zero exit code when the script is called by another script
+# (presumably because the parent script is killed as part of the process group on exit of the child
+# script...?), so using explicit traps for each background job (see below) is a better idea, or
+# maybe just restrict the process group kill to signals which cancel the script in the middle of its
+# operation
+trap 'kill 0' INT TERM HUP
+
+dname=\${0:a:h}
+bname=\${0:a:t}
 
 # copy script stderr to logfile (via named pipe)
 exec 2> >(tee -i logfile >&2)
 
 function log {
-  >&2 echo "[$(date)] $1"
+  >&2 echo "[\$bname:\$(date +'%Y-%m-%d %H:%M:%S')] \$@"
 }
 
 function newline {
   >&2 echo
 }
 
-# YN stores the result, but it's not needed since `read -q` returns 1 if the users enters anything
-# else than y or Y, so we exit because of `set -e`
+log Starting...
+
+# YN stores the result, but it's not needed since read -q returns 1 if the users enters anything
+# else than y or Y, so we exit because of set -e
 read -q "YN?Are you sure (y or n)?"
 
-# run command in background and kill it on exit / termination etc.
-sleep 10m &
-trap "kill $!" EXIT TERM INT HUP
-
-# kill the shell's process group (= all background and foreground commands) on exit / termination
-# etc. (first, convert other signals to EXIT to avoid an infinite loop caused by the kill)
-trap exit INT TERM HUP
-trap 'kill 0' EXIT
+# run command (group) in background and kill it on exit / termination etc.
+{ sleep 10m && echo Waking up... } &
+trap "kill \$!" EXIT TERM INT HUP
 
 # run multiple commands in background, then wait for them to complete
 sleep 2s &
@@ -44,5 +54,9 @@ foo=4
 
 # regex comparisons
 bar="foobarbaz"
-[[ $bar =~ "bar" ]] && echo true
-! [[ $bar =~ "qux" ]] && echo true
+[[ \$bar =~ "bar" ]] && echo true
+! [[ \$bar =~ "qux" ]] && echo true
+
+$0
+
+log Done.
