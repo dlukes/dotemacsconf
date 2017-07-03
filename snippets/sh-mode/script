@@ -4,11 +4,13 @@
 # --
 #!/usr/bin/env zsh
 
+# exit on error; this triggers the ZERR signal instead of any of the conventional signals, so all
+# trap handlers should be aware of that!
 set -e
 
 # kill the shell's process group (= all background and foreground commands) on exit / termination
 # etc. (first, convert other signals to EXIT to avoid an infinite loop caused by the kill)
-trap exit INT TERM HUP
+trap exit INT TERM HUP ZERR
 trap 'kill 0' EXIT
 
 # unfortunately, the above causes a non-zero exit code when the script is called by another script
@@ -16,7 +18,7 @@ trap 'kill 0' EXIT
 # script...?), so using explicit traps for each background job (see below) is a better idea, or
 # maybe just restrict the process group kill to signals which cancel the script in the middle of its
 # operation
-trap 'kill 0' INT TERM HUP
+trap 'kill 0' INT TERM HUP ZERR
 
 dname=\${0:a:h}
 bname=\${0:a:t}
@@ -40,7 +42,7 @@ read -q "YN?Are you sure (y or n)?"
 
 # run command (group) in background and kill it on exit / termination etc.
 { sleep 10m && echo Waking up... } &
-trap "kill \$!" EXIT TERM INT HUP
+trap "kill \$!" EXIT TERM INT HUP ZERR
 
 # run multiple commands in background, then wait for them to complete
 sleep 2s &
